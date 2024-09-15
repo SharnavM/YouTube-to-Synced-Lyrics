@@ -16,12 +16,12 @@ If the official video doesn't have subtitles, you can filter YouTube search resu
 ---
 
 ## Requirements
-- **Python 3.6+**
+- **Python 3.7+**
 - **pytubefix**
 
 Install dependencies using:
 
-```bash
+```batch
 pip install pytubefix
 ```
 
