@@ -4,16 +4,15 @@ import re
 import os
 import sys
 
+
 class SyncedLyrics:
     def __init__(self, link, output_dir=".", filename=None):
         try:
             self.youtube = YouTube(link)
         except Exception as e:
-            print(f"Error: Failed to fetch YouTube video. Please check the link. Details: {e}")
-            sys.exit(1)
-
-        if not os.path.exists(output_dir):
-            print(f"Error: Output directory '{output_dir}' does not exist.")
+            print(
+                f"Error: Failed to fetch YouTube video. Please check the link. Details: {e}"
+            )
             sys.exit(1)
 
         self.output_dir = output_dir
@@ -28,7 +27,7 @@ class SyncedLyrics:
             sys.exit(1)
 
         for index, i in enumerate(all_subs):
-            print(f"{index+1}. {i.name}")
+            print(f"{index + 1}. {i.name}")
 
         try:
             choice = int(input("Choose language of subtitles: "))
@@ -59,7 +58,7 @@ class SyncedLyrics:
             start, end = timeframe.split(" --> ")
 
             start = start[3::]
-            lrc += f"[{start[:len(start)-1].replace(',', '.')}]{lyric}\n"
+            lrc += f"[{start[: len(start) - 1].replace(',', '.')}]{lyric}\n"
 
         self.lrc = lrc
 
@@ -72,7 +71,9 @@ class SyncedLyrics:
         path = os.path.join(self.output_dir, fname)
 
         try:
-            with open(path, "w", encoding='utf-8') as f:
+            os.makedirs(self.output_dir, exist_ok=True)
+
+            with open(path, "w", encoding="utf-8") as f:
                 f.write(self.lrc)
             print(f"Lyrics saved successfully to '{path}'.")
         except Exception as e:
@@ -92,10 +93,19 @@ class SyncedLyrics:
 
 
 def main():
-    parser = argparse.ArgumentParser(description="Download synchronized lyrics (.lrc) from a YouTube video.")
+    parser = argparse.ArgumentParser(
+        description="Download synchronized lyrics (.lrc) from a YouTube video."
+    )
     parser.add_argument("link", help="The YouTube video link")
-    parser.add_argument("-o", "--output_dir", default=".", help="Output directory for the .lrc file (default: current directory)")
-    parser.add_argument("-f", "--filename", help="Output file name (default: video title)")
+    parser.add_argument(
+        "-o",
+        "--output_dir",
+        default=".",
+        help="Output directory for the .lrc file (default: current directory)",
+    )
+    parser.add_argument(
+        "-f", "--filename", help="Output file name (default: video title)"
+    )
 
     args = parser.parse_args()
 
