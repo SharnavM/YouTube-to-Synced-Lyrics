@@ -1,6 +1,6 @@
 # YouTube to Synced Lyrics
 
-A **CLI-based Python program** to convert YouTube video subtitles into synced lyrics (`.lrc`) files. This tool is especially useful for music videos with available subtitles, and it allows you to select the subtitle language of your choice.
+A **CLI and webapp-based program** to convert YouTube video subtitles into synced lyrics (`.lrc`) files. This tool is especially useful for music videos with available subtitles, and it allows you to select the subtitle language of your choice.
 
 ---
 
@@ -18,53 +18,62 @@ If the official video doesn't have subtitles, you can filter YouTube search resu
 
 ## Requirements
 
-- **Python 3.7+**
+- **Python 3.11+**
 - **pytubefix**
+- **Flask**
 
 Install dependencies using:
 
 ```batch
-pip install pytubefix
+pip install -r backend/requirements.txt
 ```
 
-> **Note**: I was experiencing `Error 400: Bad Request` with `pytube`. That's why I decided to use `pytubefix`. If  `pytube` works for you, I
-> recommend switching to it by changing the import in the code. 
-> 
-> ```python
-> from pytubefix import YouTube
-> ```
-> 
-> to 
-> 
-> ```python
-> from pytube import YouTube
-> ```
-
-Tested with Python `3.9.7` and `pytubefix==6.13.1`
+Tested with Python `3.11.9` and `pytubefix==10.10.1`
 
 ---
 
-## Parameters
+## CLI Parameters
 
-| Parameter              | Required | Description                                | Default                                  |
-| ---------------------- | -------- | ------------------------------------------ | ---------------------------------------- |
-| `link`                 | Yes      | Link of the YouTube video                  | N/A                                      |
-| `-o` or `--output_dir` | No       | Path of the folder to save the `.lrc` file | Current working directory of the program |
-| `-f` or `--filename`   | No       | Name of the downloaded `.lrc` file.        | Title of the YouTube video               |
+| Parameter              | Required | Description                                                     | Default                                  |
+| ---------------------- | -------- | --------------------------------------------------------------- | ---------------------------------------- |
+| `link`                 | Yes      | Link of the YouTube video                                       | N/A                                      |
+| `-o` or `--output_dir` | No       | Path of the folder to save the `.lrc` file                      | Current working directory of the program |
+| `-f` or `--filename`   | No       | Name of the downloaded `.lrc` file.                             | Title of the YouTube video               |
+| `-c` or `--caption`    | No       | Caption number. If omitted, you will be prompted interactively. | N/A                                      |
 
 ---
 
 ## Example Usage
 
-```sh
-python main.py "https://www.youtube.com/watch?v=qP-7GNoDJ5c" -f "Sea Shanty.lrc" -o "./lyrics"
+### CLI
+
+```bash
+python cli.py "https://www.youtube.com/watch?v=qP-7GNoDJ5c" -f "Sea Shanty.lrc" -o "./lyrics"
 ```
 
 This will download a file named `Sea Shanty.lrc` inside the `lyrics` folder.
+
+### Web App
+
+1. Start Frontend
+
+```bash
+cd frontend
+yarn # or npm install
+yarn dev # or npm run dev
+```
+
+2. Start Backend
+
+```
+python main.py
+```
+
+3. Head to `http://127.0.0.1:5173/` to open the web-app and use it.
 
 ---
 
 ## To Do / Future Improvements
 
 1. ~~Automatically create the output directory if it does not exist.~~
-2. Deploy as a web application for easier access.
+2. ~~Deploy as a web application for easier access.~~
