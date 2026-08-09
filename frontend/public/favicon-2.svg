@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title desc">
+  <title id="title">YouTube to Synced Lyrics favicon</title>
+  <desc id="desc">A red Y-shaped sync mark with lyric bars on a near-black square.</desc>
+  <style>
+    :root {
+      --red: #f12933;
+      --black: #09090b;
+    }
+  </style>
+
+  <rect width="64" height="64" rx="12" fill="var(--black)"/>
+
+  <!-- Y / source split -->
+  <path
+    d="M18 17 L32 31 L46 17"
+    fill="none"
+    stroke="#f3f3f5"
+    stroke-width="6"
+    stroke-linecap="square"
+    stroke-linejoin="miter"
+  />
+
+  <!-- sync stem -->
+  <path
+    d="M32 30 V46"
+    fill="none"
+    stroke="#f3f3f5"
+    stroke-width="6"
+    stroke-linecap="square"
+  />
+
+  <!-- lyric / timestamp bars -->
+  <path d="M15 48 H24" stroke="var(--red)" stroke-width="4" stroke-linecap="square"/>
+  <path d="M40 48 H49" stroke="var(--red)" stroke-width="4" stroke-linecap="square"/>
+</svg>
